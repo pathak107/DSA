@@ -29,7 +29,7 @@ void DFS(int start, int adj[][50],int v)
                 s.push(i); 
   
                 // Set 
-                // visited[i] = true; 
+                visited[i] = true; 
             } 
         } 
     } 
@@ -49,6 +49,9 @@ int main()
         }
         
     }
+    cout<<"Enter the starting vertex: ";
+    int start;
+    cin>>start;
     DFS(0,adj,v);
     return 0;
 

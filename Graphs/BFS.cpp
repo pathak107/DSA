@@ -51,7 +51,10 @@ int main()
         }
         
     }
-    BFS(0,adj,v);
+    cout<<"Enter the starting vertex: ";
+    int start;
+    cin>>start;
+    BFS(start,adj,v);
     return 0;
 
 }
