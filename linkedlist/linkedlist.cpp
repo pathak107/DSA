@@ -47,7 +47,18 @@ public:
     void deleteAll();
     void mergeSort();
     void sortedMerge(list &l2);
+    void reverseRec(node *head);
 };
+
+void list::reverseRec(node *curr){
+    if(curr->next==NULL){
+        this->head=curr;
+        return;
+    }
+    reverseRec(curr->next);  //reversing n-1 linked list and then adjesting the links
+    curr->next->next=curr;   //5->6->7->8->9<-10<-11 to 5->6->7->8<-9<-10<-11
+    curr->next=NULL;         //now 8's next is still pointing to 9 so point it to NULL which will help later in setting first's element' next to null.
+}
 
 void list::insertFront(int x)
 {
@@ -276,8 +287,6 @@ void list::deleteAll()
     }
 }
 
-
-
 void list::sortedMerge(list &l2)
 {
     node *curr1 = this->head;
@@ -373,14 +382,17 @@ int main()
     // l.deleteAll();
     // l.print();
 
-    list l1, l2;
-    l1.insertFromVector({1, 2, 3, 4});
-    l2.insertFromVector({5, 6, 7, 8});
-    l1.print();
-    l2.print();
-    l1.sortedMerge(l2);
-    l1.print();
-    l2.print();
+    // list l1, l2;
+    // l1.insertFromVector({1, 2, 3, 4});
+    // l2.insertFromVector({5, 6, 7, 8});
+    // l1.print();
+    // l2.print();
+    // l1.sortedMerge(l2);
+    // l1.print();
+    // l2.print();
+    l.insertFromVector(v);
+    l.reverseRec(l.getHead());
+    l.print();
 
     return 0;
 }
