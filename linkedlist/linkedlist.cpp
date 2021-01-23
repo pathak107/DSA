@@ -50,14 +50,16 @@ public:
     void reverseRec(node *head);
 };
 
-void list::reverseRec(node *curr){
-    if(curr->next==NULL){
-        this->head=curr;
+void list::reverseRec(node *curr)
+{
+    if (curr->next == NULL)
+    {
+        this->head = curr;
         return;
     }
     reverseRec(curr->next);  //reversing n-1 linked list and then adjesting the links
-    curr->next->next=curr;   //5->6->7->8->9<-10<-11 to 5->6->7->8<-9<-10<-11
-    curr->next=NULL;         //now 8's next is still pointing to 9 so point it to NULL which will help later in setting first's element' next to null.
+    curr->next->next = curr; //5->6->7->8->9<-10<-11 to 5->6->7->8<-9<-10<-11
+    curr->next = NULL;       //now 8's next is still pointing to 9 so point it to NULL which will help later in setting first's element' next to null.
 }
 
 void list::insertFront(int x)
@@ -334,7 +336,7 @@ void list::sortedMerge(list &l2)
 
             curr2->next = NULL;
             curr2 = next2;
-            if (curr2 !=NULL)
+            if (curr2 != NULL)
             {
                 next2 = curr2->next;
             }
@@ -354,11 +356,59 @@ void list::sortedMerge(list &l2)
     // l2.setHead(NULL);
 }
 
+void addTwoNumbers(node *l1, node *l2, list &l3)
+{
+    int carry = 0, sum = 0;
+    node *curr1 = l1, *curr2 = l2;
+    while (curr1 != NULL && curr2 != NULL)
+    {
+        sum = (curr1->data + curr2->data + carry);
+        carry = sum / 10;
+        if (sum > 9)
+        {
+            sum = sum % 10;
+        }
+        l3.insertBack(sum);
+        curr1 = curr1->next;
+        curr2 = curr2->next;
+    }
+
+    while (curr1 != NULL)
+    {
+        sum = curr1->data + carry;
+        carry = sum / 10;
+        if (sum > 9)
+        {
+            sum = sum % 10;
+        }
+        l3.insertBack(sum);
+        curr1 = curr1->next;
+    }
+
+    while (curr2 != NULL)
+    {
+        sum = curr2->data + carry;
+        carry = sum / 10;
+        if (sum > 9)
+        {
+            sum = sum % 10;
+        }
+        l3.insertBack(sum);
+        curr2 = curr2->next;
+    }
+
+    if (carry != 0)
+    {
+        l3.insertBack(carry);
+    }
+
+}
+
 int main()
 {
-    list l;
-    vector<int> v{5, 6, 7, 8, 9, 10};
-    int arr[] = {15, 16, 17, 18};
+    list l1, l2, l3;
+    vector<int> v1 = {8, 4, 9, 8};
+    vector<int> v2 = {5, 6, 7, 8, 6};
     // l.insertFront(1);
     // l.insertFront(2);
     // l.insertFront(3);
@@ -390,9 +440,15 @@ int main()
     // l1.sortedMerge(l2);
     // l1.print();
     // l2.print();
-    l.insertFromVector(v);
-    l.reverseRec(l.getHead());
-    l.print();
+    l1.insertFromVector(v1);
+    l1.print();
+    l1.reverse();
+    l2.insertFromVector(v2);
+    l2.print();
+    l2.reverse();
+    addTwoNumbers(l1.getHead(), l2.getHead(),l3);
+    l3.reverse();
+    l3.print();
 
     return 0;
 }

@@ -18,8 +18,17 @@ using namespace std;
 // }
 
 
-void solution(){
-
+void solution(vector<int> v,int d){
+    sort(v.begin(),v.end());
+    int maxm=v[v.size()-1];
+    if(v[0]+v[1]<=d){
+        cout<<"YES"<<endl;
+    }
+    else if(maxm<=d){
+        cout<<"YES"<<endl;
+    }else{
+        cout<<"NO"<<endl;
+    }
 }
 
 int32_t main()
@@ -36,8 +45,8 @@ int32_t main()
     cin>>t;
 
     while(t--){
-        int n, ele;
-        cin>>n;
+        int n, ele,d;
+        cin>>n>>d;
         vector<int> v;//for inputing vector
         for (int i = 0; i < n; i++)
         {
@@ -45,7 +54,7 @@ int32_t main()
             v.push_back(ele);
         }
 
-        solution();
+        solution(v,d);
         
     }
     
